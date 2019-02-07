@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var intArray:[[Int]] = Array(repeating: Array(repeating: 0, count: 4), count: 4)
 
     override func viewDidLoad() {
         super.viewDidLoad()
