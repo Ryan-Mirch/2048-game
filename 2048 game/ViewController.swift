@@ -10,11 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var intArray:[[Int]] = Array(repeating: Array(repeating: 0, count: 4), count: 4)
+    let logic: Logic = Logic()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        logic.initialize()
+        drawBoard()
+    }
+    
+    func drawBoard(){
+        let board = logic.getBoard()
     }
 
 
