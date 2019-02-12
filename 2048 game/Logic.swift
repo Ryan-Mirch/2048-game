@@ -58,12 +58,14 @@ class Logic {
     func swipe(direction: String, updateBoard: Bool ){
         var newBoard =  board
         
+        //combine right to left
         if(direction == "left"){
             for row in 0...3{
                 newBoard[row] = combine(array: board[row])
             }
         }
         
+        //combine left to right
         if(direction == "right"){
             for row in 0...3{
                 
@@ -73,6 +75,43 @@ class Logic {
                 
                 combinedArray.reverse()
                 newBoard[row] = combinedArray
+            }
+        }
+        
+        //combine bottom to top
+        if(direction == "up"){
+            for col in 0...3{
+                
+                let arrayToCombine = [board[0][col],
+                                      board[1][col],
+                                      board[2][col],
+                                      board[3][col]]
+                
+                var combinedArray = combine(array: arrayToCombine)
+                
+                for i in 0...3{
+                    newBoard[i][col] = combinedArray[i]
+                }
+            }
+        }
+        
+        //combine top to bottom
+        if(direction == "down"){
+            for col in 0...3{
+                
+                var arrayToCombine = [board[0][col],
+                                      board[1][col],
+                                      board[2][col],
+                                      board[3][col]]
+                
+                arrayToCombine.reverse()
+                
+                var combinedArray = combine(array: arrayToCombine)
+                combinedArray.reverse()
+                
+                for i in 0...3{
+                    newBoard[i][col] = combinedArray[i]
+                }
             }
         }
         
