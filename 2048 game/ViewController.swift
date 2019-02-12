@@ -56,22 +56,28 @@ class ViewController: UIViewController {
     }
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        
         if gesture.direction == UISwipeGestureRecognizer.Direction.left {
             print("Swipe Left")
+            logic.swipe(direction: "left", updateBoard: true)
         }
         
         if gesture.direction == UISwipeGestureRecognizer.Direction.right {
             print("Swipe Right")
+            logic.swipe(direction: "right", updateBoard: true)
         }
         
         if gesture.direction == UISwipeGestureRecognizer.Direction.up {
             print("Swipe Up")
+            logic.swipe(direction: "up", updateBoard: true)
         }
         
         if gesture.direction == UISwipeGestureRecognizer.Direction.down {
             print("Swipe Down")
+            logic.swipe(direction: "down", updateBoard: true)
         }
         
+        drawBoard()
     }
     func drawBoard(){
         let board = logic.getBoard()
@@ -92,8 +98,6 @@ class ViewController: UIViewController {
         spot14.text = String(board[3][1])
         spot15.text = String(board[3][2])
         spot16.text = String(board[3][3])
-        
-        print(board)
     }
 
 

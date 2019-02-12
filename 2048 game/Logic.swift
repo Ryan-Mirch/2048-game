@@ -22,10 +22,7 @@ class Logic {
         return board
     }
     
-    func insertValueInRandomOpenSpot(value: Int) -> Bool{ //false if the board is full
-        if boardFull(){
-            return false
-        }
+    func insertValueInRandomOpenSpot(value: Int){ //false if the board is full
         
         var availablePoints: [xyPoint] =  []
         
@@ -43,7 +40,6 @@ class Logic {
         let randomY = randomPoint?.y
         
         board[randomX!][randomY!] = value
-        return true
         
     }
     
@@ -58,24 +54,79 @@ class Logic {
         return true
     }
     
-    func swipe(direction: String, updateBoard: Bool ) -> [[Int]] {
+    //returns true if something moved
+    func swipe(direction: String, updateBoard: Bool ){
         var newBoard =  board
-        var somethingMoved = false
         
         if(direction == "left"){
-            
+            for row in 0...3{
+                newBoard[row] = combine(array: board[row])
+            }
         }
         
-        return newBoard
+        if(direction == "right"){
+            for row in 0...3{
+                
+                var arrayToCombine = board[row]
+                arrayToCombine.reverse()
+                var combinedArray = combine(array: arrayToCombine)
+                
+                combinedArray.reverse()
+                newBoard[row] = combinedArray
+            }
+        }
+        
+        var somethingMoved = false
+        if(newBoard != board){
+            somethingMoved = true
+        }
+        
+        if(updateBoard){
+            board = newBoard
+            if(somethingMoved){
+                insertValueInRandomOpenSpot(value: 2)
+            }
+        }
     }
     
-    func combine(array: [Int]) -> [Int] { // combines left into right
+    func combine(array: [Int]) -> [Int] { // combines right into left
         var newArray = array
-        
-        for i in (array.capacity - 1)...0 {
-            if(newArray[i] == newArray[i + 1]){
-                newArray[i + 1] = newArray[i] * 2
-                newArray[i] = 0
+        var hasBeenCombined = [false, false, false, false]
+        for i in 1...3 {
+            
+            if(newArray[i] != 0){
+                var newSpot = i
+                
+                //this loop moves the number into the farthest open spot
+                while newSpot > 0 {
+                    if newArray[newSpot - 1] == 0 {
+                        newSpot = newSpot - 1
+                    }
+                    else {
+                        break
+                    }
+                }
+                
+                //if new spot is actually a new spot
+                if(newSpot != i){
+                    
+                    //move number to it
+                    newArray[newSpot] = newArray[i]
+                    newArray[i] = 0
+                }
+                
+                if(newSpot != 0) {
+                    // this combines the number with the next if they are the same
+                    // and if that number hasnt already been combined
+                    if(newArray[newSpot] == newArray[newSpot - 1] &&
+                        hasBeenCombined[newSpot - 1] == false){
+                        
+                        newArray[newSpot - 1] = newArray[newSpot] * 2
+                        newArray[newSpot] = 0
+                        hasBeenCombined[newSpot - 1] = true
+                        
+                    }
+                }
             }
         }
         return newArray
