@@ -58,6 +58,29 @@ class Logic {
         return true
     }
     
+    func swipe(direction: String, updateBoard: Bool ) -> [[Int]] {
+        var newBoard =  board
+        var somethingMoved = false
+        
+        if(direction == "left"){
+            
+        }
+        
+        return newBoard
+    }
+    
+    func combine(array: [Int]) -> [Int] { // combines left into right
+        var newArray = array
+        
+        for i in (array.capacity - 1)...0 {
+            if(newArray[i] == newArray[i + 1]){
+                newArray[i + 1] = newArray[i] * 2
+                newArray[i] = 0
+            }
+        }
+        return newArray
+    }
+    
     struct xyPoint{
         let x: Int
         let y: Int
