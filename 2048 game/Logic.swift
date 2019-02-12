@@ -50,12 +50,12 @@ class Logic {
     func boardFull() -> Bool {
         for x in 0...3{
             for y in 0...3{
-                if board[x][y] != 0 {
+                if board[x][y] == 0 {
                     return false
                 }
             }
         }
-        return true;
+        return true
     }
     
     struct xyPoint{
