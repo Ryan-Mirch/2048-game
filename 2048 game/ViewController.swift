@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     let logic: Logic = Logic()
 
+    
     @IBOutlet weak var spot1: UILabel!
     @IBOutlet weak var spot2: UILabel!
     @IBOutlet weak var spot3: UILabel!
@@ -32,12 +33,46 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeUp.direction = .up
+        self.view.addGestureRecognizer(swipeUp)
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeDown.direction = .down
+        self.view.addGestureRecognizer(swipeDown)
         // Do any additional setup after loading the view, typically from a nib.
         logic.initialize()
         drawBoard()
         
     }
     
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.left {
+            print("Swipe Left")
+        }
+        
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            print("Swipe Right")
+        }
+        
+        if gesture.direction == UISwipeGestureRecognizer.Direction.up {
+            print("Swipe Up")
+        }
+        
+        if gesture.direction == UISwipeGestureRecognizer.Direction.down {
+            print("Swipe Down")
+        }
+        
+    }
     func drawBoard(){
         let board = logic.getBoard()
         
