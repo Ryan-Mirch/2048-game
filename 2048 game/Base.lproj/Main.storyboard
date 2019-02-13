@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="center" ambiguous="YES" axis="vertical" distribution="equalCentering" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GJz-8q-zFH">
-                                <rect key="frame" x="0.0" y="106" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="106" width="375" height="370"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fPa-G1-a1W">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -153,6 +153,16 @@
                                             <constraint firstAttribute="height" constant="60" id="WDn-T4-Xxz"/>
                                         </constraints>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oci-bu-HrI">
+                                        <rect key="frame" x="87.5" y="330" width="200" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="JqR-9Q-Qot"/>
+                                            <constraint firstAttribute="width" constant="200" id="ND9-lU-SPD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -163,6 +173,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="GameOverLabel" destination="oci-bu-HrI" id="fgb-4P-6PK"/>
                         <outlet property="spot1" destination="3Yx-h6-az6" id="Mk8-bW-POy"/>
                         <outlet property="spot10" destination="G2Z-H0-8he" id="osa-hS-WKa"/>
                         <outlet property="spot11" destination="zx9-pp-VnL" id="mRA-8f-bQV"/>
@@ -183,6 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="141.59999999999999" y="107.49625187406298"/>
         </scene>
     </scenes>
 </document>

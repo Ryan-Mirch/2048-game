@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     let logic: Logic = Logic()
 
+    @IBOutlet weak var GameOverLabel: UILabel!
     
     @IBOutlet weak var spot1: UILabel!
     @IBOutlet weak var spot2: UILabel!
@@ -57,9 +58,10 @@ class ViewController: UIViewController {
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         
+        var somethingMoved = false
         if gesture.direction == UISwipeGestureRecognizer.Direction.left {
             print("Swipe Left")
-            logic.swipe(direction: "left", updateBoard: true)
+            somethingMoved = logic.swipe(direction: "left", updateBoard: true)
         }
         
         if gesture.direction == UISwipeGestureRecognizer.Direction.right {
@@ -78,6 +80,16 @@ class ViewController: UIViewController {
         }
         
         drawBoard()
+        let gameStatus = logic.gameOverCheck()
+        
+        if(gameStatus == -1){
+            GameOverLabel.text = "Game Over"
+        }
+        
+        if(gameStatus == 1){
+            GameOverLabel.text = "You Win!"
+        }
+        
     }
     func drawBoard(){
         let board = logic.getBoard()

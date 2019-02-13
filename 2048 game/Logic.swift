@@ -55,7 +55,7 @@ class Logic {
     }
     
     //returns true if something moved
-    func swipe(direction: String, updateBoard: Bool ){
+    func swipe(direction: String, updateBoard: Bool ) -> Bool{
         var newBoard =  board
         
         //combine right to left
@@ -126,6 +126,7 @@ class Logic {
                 insertValueInRandomOpenSpot(value: 2)
             }
         }
+        return somethingMoved
     }
     
     func combine(array: [Int]) -> [Int] { // combines right into left
@@ -169,6 +170,37 @@ class Logic {
             }
         }
         return newArray
+    }
+    
+    //returns -1 if you lost, 0 if the game isnt over, 1 if you won
+    func gameOverCheck() -> Int {
+        for x in 0...3{
+            for y in 0...3{
+                //if the number 2048 is on the board, you win
+                if board[x][y] == 2048 {
+                    return 1
+                }
+            }
+        }
+        
+        for x in 0...3{
+            for y in 0...3{
+                //if the number 0 is on the board, you continue playing
+                if board[x][y] == 0 {
+                    return 0
+                }
+            }
+        }
+        
+        //if there isnt a 0 on the board, test every swipe direction.
+        //if swipe returns true, something moved, so the game continues.
+        if(swipe(direction: "left", updateBoard: false)) { return 0 }
+        if(swipe(direction: "right", updateBoard: false)) { return 0 }
+        if(swipe(direction: "up", updateBoard: false)) { return 0 }
+        if(swipe(direction: "down", updateBoard: false)) { return 0 }
+        
+        //if nothing moves after every test swipe, you lose.
+        return -1
     }
     
     struct xyPoint{
